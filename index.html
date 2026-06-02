@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanilla JS Todo App</title>
+
+  <!-- CSS 파일 연결 -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app-container">
+    <section class="todo-card">
+      <div class="todo-header">
+        <p class="todo-label">PRODUCTIVITY</p>
+        <h1>Todo List</h1>
+        <p class="todo-description">
+          주간 일정과 날짜별 할 일을 함께 관리해보세요.
+        </p>
+      </div>
+
+      <!-- 주간 뷰 전체 영역 -->
+      <div class="week-view">
+        <div class="week-header">
+          <button type="button" class="week-button" id="prevWeekButton">
+            이전 주차
+          </button>
+
+          <div class="selected-date-box">
+            <p class="date-label">선택된 날짜</p>
+            <h2 id="selectedDateText">오늘 날짜</h2>
+          </div>
+
+          <button type="button" class="week-button" id="nextWeekButton">
+            다음 주차
+          </button>
+        </div>
+
+        <!-- 월요일부터 일요일까지 날짜 버튼이 JS로 들어갈 영역 -->
+        <div class="week-days" id="weekDays"></div>
+      </div>
+
+      <!-- Todo 입력 영역 -->
+      <form class="todo-form" id="todoForm">
+        <input
+          type="text"
+          id="todoInput"
+          class="todo-input"
+          placeholder="할 일을 입력하세요"
+          autocomplete="off"
+        />
+        <button type="submit" class="add-button">추가</button>
+      </form>
+
+      <!-- 입력값이 비어있을 때 보여줄 안내 메시지 -->
+      <p class="message" id="message"></p>
+
+      <!-- 상태별 필터 탭 영역 -->
+      <div class="filter-tabs" id="filterTabs">
+        <button type="button" class="filter-button active" data-filter="all">
+          전체
+        </button>
+        <button type="button" class="filter-button" data-filter="active">
+          진행 중
+        </button>
+        <button type="button" class="filter-button" data-filter="completed">
+          완료
+        </button>
+      </div>
+
+      <!-- Todo 목록이 표시될 영역 -->
+      <ul class="todo-list" id="todoList"></ul>
+    </section>
+  </main>
+
+  <!-- JS 파일 연결 -->
+  <script src="./app.js"></script>
+</body>
+</html>

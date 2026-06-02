@@ -1,0 +1,419 @@
+/* 전체 요소의 크기 계산 방식을 통일 */
+* {
+  box-sizing: border-box;
+}
+
+/* 기본 여백 제거 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f5ff;
+  color: #222;
+}
+
+/* 화면 중앙 정렬 */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
+
+/* Todo 앱 카드 */
+.todo-card {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 20px 50px rgba(103, 43, 224, 0.12);
+}
+
+/* 상단 제목 영역 */
+.todo-header {
+  margin-bottom: 28px;
+}
+
+.todo-label {
+  margin: 0 0 8px;
+  color: #672be0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.todo-header h1 {
+  margin: 0;
+  font-size: 36px;
+  color: #111;
+}
+
+.todo-description {
+  margin: 10px 0 0;
+  color: #777;
+  font-size: 15px;
+}
+
+/* 주간 뷰 전체 영역 */
+.week-view {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f6ff;
+  border: 1px solid #eee8ff;
+  border-radius: 20px;
+}
+
+/* 이전 주차 / 다음 주차 / 선택된 날짜 영역 */
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* 주차 이동 버튼 */
+.week-button {
+  padding: 11px 14px;
+  border: none;
+  border-radius: 12px;
+  background: #eee8ff;
+  color: #672be0;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 주차 이동 버튼 hover 효과 */
+.week-button:hover {
+  background: #e2d8ff;
+}
+
+/* 선택된 날짜 표시 박스 */
+.selected-date-box {
+  flex: 1;
+  text-align: center;
+}
+
+/* 선택된 날짜 작은 라벨 */
+.date-label {
+  margin: 0 0 4px;
+  color: #8a82a0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 선택된 날짜 텍스트 */
+.selected-date-box h2 {
+  margin: 0;
+  color: #222;
+  font-size: 22px;
+}
+
+/* 월요일부터 일요일까지 날짜 버튼 영역 */
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+/* 날짜 하나 버튼 */
+.day-card {
+  min-height: 88px;
+  padding: 10px 6px;
+  border: 1px solid #e6defb;
+  border-radius: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* 날짜 버튼 hover 효과 */
+.day-card:hover {
+  border-color: #672be0;
+  background: #fbfaff;
+}
+
+/* 현재 선택된 날짜 */
+.day-card.selected {
+  background: #672be0;
+  color: #ffffff;
+  border-color: #672be0;
+  box-shadow: 0 8px 18px rgba(103, 43, 224, 0.22);
+}
+
+/* 오늘 날짜 */
+.day-card.today {
+  border: 2px solid #672be0;
+}
+
+/* 오늘이면서 선택된 날짜 */
+.day-card.today.selected {
+  border: 2px solid #3f159b;
+}
+
+/* 요일 텍스트 */
+.day-name {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8a82a0;
+}
+
+/* 선택된 날짜 안의 요일 텍스트 */
+.day-card.selected .day-name {
+  color: #eee8ff;
+}
+
+/* 날짜 숫자 */
+.day-number {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Todo 개수 */
+.todo-count {
+  display: inline-block;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #f3efff;
+  color: #672be0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* 선택된 날짜 안의 Todo 개수 */
+.day-card.selected .todo-count {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+/* 입력창과 추가 버튼을 감싸는 영역 */
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Todo 입력창 */
+.todo-input {
+  flex: 1;
+  padding: 15px 16px;
+  border: 1px solid #ddd8f0;
+  border-radius: 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+/* 입력창 클릭 시 강조 */
+.todo-input:focus {
+  border-color: #672be0;
+  box-shadow: 0 0 0 3px rgba(103, 43, 224, 0.12);
+}
+
+/* 추가 버튼 */
+.add-button {
+  padding: 0 22px;
+  border: none;
+  border-radius: 14px;
+  background: #672be0;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 버튼에 마우스를 올렸을 때 */
+.add-button:hover {
+  background: #5723c0;
+}
+
+/* 안내 메시지 */
+.message {
+  min-height: 22px;
+  margin: 8px 0 18px;
+  color: #e03131;
+  font-size: 14px;
+}
+
+/* 필터 탭 전체 영역 */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  margin-bottom: 20px;
+  background: #f3efff;
+  border-radius: 16px;
+}
+
+/* 필터 버튼 기본 스타일 */
+.filter-button {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #6f6a7a;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 필터 버튼에 마우스를 올렸을 때 */
+.filter-button:hover {
+  background: rgba(103, 43, 224, 0.08);
+  color: #672be0;
+}
+
+/* 현재 선택된 필터 버튼 */
+.filter-button.active {
+  background: #672be0;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(103, 43, 224, 0.22);
+}
+
+/* Todo 목록 */
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Todo 항목 하나 */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #eeeaf8;
+  border-radius: 16px;
+  background: #fbfaff;
+}
+
+/* Todo 텍스트 */
+.todo-text {
+  flex: 1;
+  font-size: 15px;
+  word-break: break-all;
+}
+
+/* 완료된 Todo 텍스트 */
+.todo-text.completed {
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* 수정 입력창 */
+.edit-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+/* Todo 항목 안의 버튼 공통 스타일 */
+.todo-button {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 수정 버튼 */
+.edit-button {
+  background: #eee8ff;
+  color: #672be0;
+}
+
+/* 완료 버튼 */
+.complete-button {
+  background: #e7f7ee;
+  color: #16803c;
+}
+
+/* 삭제 버튼 */
+.delete-button {
+  background: #ffe8e8;
+  color: #d62828;
+}
+
+/* 저장 버튼 */
+.save-button {
+  background: #672be0;
+  color: #ffffff;
+}
+
+/* 버튼 hover 효과 */
+.todo-button:hover {
+  opacity: 0.8;
+}
+
+/* Todo가 없을 때 보여줄 문구 */
+.empty-message {
+  margin: 28px 0 0;
+  padding: 24px;
+  text-align: center;
+  color: #8a82a0;
+  background: #fbfaff;
+  border: 1px dashed #ddd8f0;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+/* 모바일 화면 대응 */
+@media (max-width: 620px) {
+  .todo-card {
+    padding: 28px 20px;
+  }
+
+  .week-header {
+    flex-direction: column;
+  }
+
+  .week-button {
+    width: 100%;
+  }
+
+  .week-days {
+    grid-template-columns: repeat(7, minmax(62px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .day-card {
+    min-width: 62px;
+  }
+
+  .selected-date-box h2 {
+    font-size: 19px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .add-button {
+    height: 48px;
+  }
+
+  .filter-tabs {
+    flex-direction: column;
+  }
+
+  .todo-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .todo-button {
+    width: 100%;
+  }
+}
